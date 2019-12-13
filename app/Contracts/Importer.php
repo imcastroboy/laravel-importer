@@ -9,5 +9,5 @@ interface Importer
      * Get the transformed resource from a source url
      * @return Collection 
      */
-    public function getPlayers();
+    public function getPlayers(int $limit = 0);
 }

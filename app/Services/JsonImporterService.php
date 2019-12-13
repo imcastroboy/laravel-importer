@@ -14,9 +14,9 @@ class JsonImporterService implements Importer
         $this->data = json_decode($response);
     }
 
-    public function getPlayers()
+    public function getPlayers(int $limit = 0)
     {
-        $limit = config('importer.limit');
+        $limit = $limit === 0 ? config('importer.limit') : $limit;
 
         return collect($this->data->elements)->slice(0, $limit)
             ->map(function($player) {

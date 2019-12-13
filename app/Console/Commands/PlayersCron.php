@@ -14,7 +14,7 @@ class PlayersCron extends Command
      *
      * @var string
      */
-    protected $signature = 'import:players';
+    protected $signature = 'import:players {limit=100}';
 
     /**
      * The console command description.
@@ -47,7 +47,14 @@ class PlayersCron extends Command
      */
     public function handle()
     {
-        $this->importer->getPlayers()->map(function($player) {
+        $limit = $this->argument('limit');
+        $importerLimit = config('importer.limit');
+
+        if($limit < $importerLimit) {
+            return $this->info('More than ' . $importerLimit . ' players needed.');
+        }
+
+        $this->importer->getPlayers($limit)->map(function($player) {
             return $this->playerRepo->save($player);
         });
 
