@@ -8,7 +8,5 @@ interface Repository
 
     public function findById(int $id = 0);
 
-    public function delete(int $id = 0);
-
     public function save(array $data, int $id = 0);
 }

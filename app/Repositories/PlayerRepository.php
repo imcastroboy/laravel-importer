@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Contracts\Repository;
 use App\Player;
+use App\Stats;
 
 class PlayerRepository implements Repository
 {
@@ -27,22 +28,18 @@ class PlayerRepository implements Repository
         return $this->players->find($id);
     }
 
-    public function delete(int $id = 0)
-    {
-        return $this->findById($id)->delete();
-    }
-
-
     public function save(array $data, int $id = 0)
     {
-        return $this->players->updateOrCreate(
+        $this->players->updateOrCreate(
             [
-                'player_id' => $data['player_id'], 
-                'first_name' => $data['first_name'],
-                'second_name' => $data['second_name']
+                'id' => $data['player']['id']
             ],
-            $data
+
+            $data['player']
         );
+        
+        $player = $this->findById($data['player']['id']);
+        $player->stats()->save(new Stats($data['stats']));
     }
 
 }
