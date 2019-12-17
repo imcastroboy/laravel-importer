@@ -12,6 +12,8 @@ class PlayerSeeder extends Seeder
      */
     public function run()
     {
-        factory(Player::class, 100)->create();
+        factory(Player::class, 100)->create()->each(function ($player) {
+            $player->stats()->save(factory(App\Stats::class)->make());
+        });
     }
 }

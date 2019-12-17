@@ -7,14 +7,14 @@ use Faker\Generator as Faker;
 
 $factory->define(Player::class, function (Faker $faker) {
     return [
-        'player_id' => $faker->numberBetween(1,500),
+        'id' => $faker->unique()->randomDigit,
         'first_name' => $faker->firstName,
         'second_name' => $faker->lastName,
-        'form' => $faker->randomFloat(1,0,50),
-        'total_points' => $faker->numberBetween(0,20),
-        'influence' => $faker->randomFloat(1,0,50),
-        'creativity' => $faker->randomFloat(1,0,50),
-        'threat' => $faker->randomFloat(1,0,50),
-        'ict_index' => $faker->randomFloat(1,0,50),
+        'photo' => $faker->randomFloat(1,0,50),
+        'web_name' => $faker->lastName,
+        'status' => $faker->randomLetter,
+        'squad_number' => null,
+        'team' => $faker->numberBetween(1,10),
+        'team_code' => $faker->numberBetween(1,10),
     ];
 });

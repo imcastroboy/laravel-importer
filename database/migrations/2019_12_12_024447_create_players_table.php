@@ -14,17 +14,18 @@ class CreatePlayersTable extends Migration
     public function up()
     {
         Schema::create('players', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('player_id');
+            $table->bigInteger('id');
             $table->string('first_name', 250);
             $table->string('second_name', 250);
-            $table->float('form', 8, 1);
-            $table->integer('total_points');
-            $table->float('influence', 8, 1);
-            $table->float('creativity', 8, 1);
-            $table->float('threat', 8, 1);
-            $table->float('ict_index', 8, 1);
+            $table->string('web_name', 250);
+            $table->string('photo', 250)->nullable();
+            $table->integer('squad_number')->nullable();
+            $table->string('status', 10);
+            $table->integer('team');
+            $table->integer('team_code');
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 
