@@ -25,7 +25,6 @@ class PlayersController extends Controller
      */
     public function index()
     {
-
         return new PlayersCollection($this->player->getData());
     }
 
@@ -37,7 +36,18 @@ class PlayersController extends Controller
      */
     public function show($id)
     {
-        return new PlayerResource($this->player->findById($id));
+        $player = $this->player->findById($id);
+
+        if(!$player) {
+            return response()->json([
+                'error' => 'Not Found',
+                'message' => 'Cannot find the specific player.',
+                'code' => 404
+            ], 404);
+
+        }
+
+        return new PlayerResource($player);
     }
 
 
