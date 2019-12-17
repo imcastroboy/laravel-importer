@@ -24,7 +24,7 @@ class Players extends ResourceCollection
     public function getInfo($player)
     {
         return [
-            'id' => $player->player_id,
+            'id' => $player->id,
             'fullname' => $player->fullname
         ];
     }

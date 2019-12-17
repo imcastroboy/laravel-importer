@@ -19,12 +19,12 @@ class Player extends JsonResource
             "id" => $this->id,
             "first_name" => $this->first_name,
             "second_name" => $this->second_name,
-            "form" => $this->form,
-            "total_points" => $this->total_points,
-            "influence" => $this->influence,
-            "creativity" => $this->creativity,
-            "threat" => $this->threat,
-            "ict_index" => $this->ict_index,
+            "form" => $this->stats->form,
+            "total_points" => $this->stats->total_points,
+            "influence" => $this->stats->influence,
+            "creativity" => $this->stats->creativity,
+            "threat" => $this->stats->threat,
+            "ict_index" => $this->stats->ict_index,
         ];
     }
 }
