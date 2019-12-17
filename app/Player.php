@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Stats;
 use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
@@ -10,22 +11,17 @@ class Player extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = [
-        'player_id', 
-        'first_name', 
-        'second_name', 
-        'form', 
-        'total_points', 
-        'influence', 
-        'creativity', 
-        'threat', 
-        'ict_index'
-    ];
+    protected $guarded = [];
 
     protected $appends = ['fullname'];
 
     public function getFullnameAttribute()
     {
         return $this->attributes['first_name'] . ' ' . $this->attributes['second_name'];
+    }
+
+    public function stats()
+    {
+        return $this->hasOne(Stats::class, 'player_id', 'id');
     }
 }
