@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Contracts\Importer;
 use App\Services\JsonImporterService;
+use App\Repositories\PlayerRepository;
 use Illuminate\Support\ServiceProvider;
+use App\Services\NativeHttpClientService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +20,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(Importer::class, function() {
             $source = config('importer.source');
             
-            return new JsonImporterService($source);
+            return new JsonImporterService(
+                new NativeHttpClientService($source),
+                new PlayerRepository
+            );
         });
     }
 
