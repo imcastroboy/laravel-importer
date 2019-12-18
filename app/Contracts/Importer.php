@@ -6,8 +6,20 @@ namespace App\Contracts;
 interface Importer 
 {
     /**
-     * Get the transformed resource from a source url
+     * Transform data into Player, Stats, Person entity.
      * @return Collection 
      */
-    public function getPlayers(int $limit = 0);
+    public function transform();
+
+    /**
+     * Get elements from a source.
+     * @return Collection 
+     */
+    public function getElements();
+
+    /**
+     * Performs the actual saving of elements to the database
+     * @return Collection 
+     */
+    public function execute();
 }
